@@ -43,7 +43,7 @@
         }
         .footer-text {
             position: absolute;
-            top: 22%;
+            top: 25%;
             font-family: 'Montserrat', sans-serif;
             font-size: 24px;
             color: white;
@@ -68,7 +68,7 @@
     <div class="footer-text" onclick="window.open('https://t.me/SOUNDOPP')">TG:SOUNDOPP</div>
     <i class="fa-solid fa-volume-high sound-icon" id="soundIcon"></i>
     <img src="fref.png" alt="" id="playImage">
-    <audio id="audio" loop>
+    <audio id="audio" loop autoplay>
         <source src="oudap.mp3" type="audio/mpeg">
     </audio>
     <script>
@@ -76,16 +76,7 @@
             const audio = document.getElementById("audio");
             const playImage = document.getElementById("playImage");
             const soundIcon = document.getElementById("soundIcon");
-            let isPlaying = false;
-
-            const playAudio = () => {
-                audio.play().catch(error => {
-                    document.addEventListener("click", playAudio, { once: true });
-                });
-            };
-
-            playAudio();
-            isPlaying = true;
+            let isPlaying = true;
 
             playImage.addEventListener("click", () => {
                 if (isPlaying) {
