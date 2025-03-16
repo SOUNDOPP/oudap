@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a, #4a4a4a);
+            background-size: 300% 300%;
+            animation: gradientAnimation 4s infinite linear;
+            flex-direction: column;
+            position: relative;
+            user-select: none;
+        }
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        .footer-text {
+            position: absolute;
+            top: 22%;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+        }
+        .sound-icon {
+            position: absolute;
+            bottom: 15%;
+            font-size: 48px;
+            color: white;
+            animation: soundWave 1.5s infinite ease-in-out;
+        }
+        @keyframes soundWave {
+            0% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <div class="footer-text" onclick="window.open('https://t.me/SOUNDOPP')">TG:SOUNDOPP</div>
+    <i class="fa-solid fa-volume-high sound-icon" id="soundIcon"></i>
+    <img src="fref.png" alt="" id="playImage">
+    <audio id="audio" loop>
+        <source src="siiat.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("audio");
+            const playImage = document.getElementById("playImage");
+            const soundIcon = document.getElementById("soundIcon");
+            let isPlaying = false;
+
+            const playAudio = () => {
+                audio.play().catch(error => {
+                    document.addEventListener("click", playAudio, { once: true });
+                });
+            };
+
+            playAudio();
+            isPlaying = true;
+
+            playImage.addEventListener("click", () => {
+                if (isPlaying) {
+                    audio.pause();
+                    soundIcon.style.animation = "none";
+                } else {
+                    audio.play();
+                    soundIcon.style.animation = "soundWave 1.5s infinite ease-in-out";
+                }
+                isPlaying = !isPlaying;
+            });
+        });
+    </script>
+</body>
+</html>
